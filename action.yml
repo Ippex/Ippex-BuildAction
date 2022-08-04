@@ -10,6 +10,10 @@ inputs:
     description: Boolean flag which declares if should install required tools.
     required: true
     default: 'true'
+  target:
+    description: The command to run.
+    required: false
+    default: Default
 
 runs:
   using: composite
@@ -30,7 +34,7 @@ runs:
       shell: bash
       
     - name: Run Script
-      run: ${GITHUB_ACTION_PATH}/script.sh
+      run: ${GITHUB_ACTION_PATH}/script.sh ${{ inputs.target }}
       shell: bash
       
     - run: echo "::remove-matcher owner=bash-action::"
