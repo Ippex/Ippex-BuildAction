@@ -1,19 +1,15 @@
-name: SimCube BuildTool
-description: Executes the SimCube Build Tool.
+name: Ippex BuildTool
+description: Executes the Ippex Build Tool.
 
 inputs:
-  setupDotNet:
-    description: Boolean flag which declares if dotnet should be setup.
-    required: false
-    default: 'false'
   checkout:
     description: Boolean flag which declares if git checkout should take place or not by this script.
-    required: false
-    default: 'false'
+    required: true
+    default: 'true'
   installRequired:
     description: Boolean flag which declares if should install required tools.
-    required: false
-    default: 'false'
+    required: true
+    default: 'true'
 
 runs:
   using: composite
@@ -24,16 +20,10 @@ runs:
       with:
         fetch-depth: 0
         
-    - if: ${{ inputs.setupDotNet == 'true' }}
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '6.0.x'
-        
     - if: ${{ inputs.installRequired == 'true' }}
       shell: bash
       run: |
-        dotnet tool update -g SimCube.BuildTool
-        dotnet tool update -g dotnet-sonarscanner
+        dotnet tool update -g BuildTool
         
     - run: echo "::add-matcher::${GITHUB_ACTION_PATH}/matcher.json"
       shell: bash
