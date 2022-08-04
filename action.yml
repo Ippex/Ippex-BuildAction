@@ -23,6 +23,7 @@ runs:
     - if: ${{ inputs.installRequired == 'true' }}
       shell: bash
       run: |
+        dotnet nuget locals http-cache --clear
         dotnet tool update -g BuildTool
         
     - run: echo "::add-matcher::${GITHUB_ACTION_PATH}/matcher.json"
