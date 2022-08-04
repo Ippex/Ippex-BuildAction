@@ -3,21 +3,21 @@
 set -e
 
 zero=0;
-toolbinary="simcubebuildtool"
+toolbinary="ippexbuilder"
 
-echo "SimCube.BuildTool"
+echo "Ippex.BuildTool"
 
-if bash -c "${SIMCUBE_DOTNET_TOOL_PATH}/${toolbinary} -t DotNet"; then
+if bash -c "${toolbinary}"; then
     # no op
     exit_code=$?
     if [[ $exit_code -eq $zero ]]; then
         echo "Successfully Completed"
     else
-        echo "ERROR: running '${SIMCUBE_DOTNET_TOOL_PATH}/${toolbinary}', exited with $exit_code"
+        echo "ERROR: running '${toolbinary}', exited with $exit_code"
         exit $exit_code       
     fi
 else
     exit_code=$?
-    echo "ERROR: running '${SIMCUBE_DOTNET_TOOL_PATH}/${toolbinary}', exited with $exit_code"
+    echo "ERROR: running '${toolbinary}', exited with $exit_code"
     exit $exit_code
 fi
